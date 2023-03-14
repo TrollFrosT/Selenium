@@ -39,12 +39,12 @@ class ChromeTest {
 
     void shouldTest() {
         driver.get("http://localhost:9999/");
-        driver.findElements(By.className("input__control")).get(0).sendKeys("Иванов Иван");
-        driver.findElements(By.className("input__control")).get(1).sendKeys("+79119999999");
-        driver.findElement(By.className("checkbox__text")).click();
+        driver.findElement(By.cssSelector("span[data-test-id=name] input")).sendKeys("Иванов-Смирнов Иван");
+        driver.findElement(By.cssSelector("span[data-test-id=phone] input")).sendKeys("+79119999999");
+        driver.findElement(By.cssSelector("label[data-test-id=agreement]")).click();
         driver.findElement(By.className("button__text")).click();
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.tagName("p")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("p[data-test-id=order-success]")).getText().trim();
         Assertions.assertEquals(expected, actual);
 
 
